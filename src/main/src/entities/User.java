@@ -4,6 +4,8 @@ public class User {
 
     private int id;
 
+    private String email;
+
     private String firstName;
 
     private String lastName;
@@ -15,8 +17,6 @@ public class User {
         this.lastName = lastName;
         this.email = email;
     }
-
-    private String email;
 
     public int getId()
     {
