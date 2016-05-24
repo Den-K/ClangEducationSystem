@@ -9,9 +9,8 @@ package controller;
 @RequestMapping("user")
 public class UserController {
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView userRegistration(ModelAndView modelAndView) {
-
         return modelAndView;
     }
 }
