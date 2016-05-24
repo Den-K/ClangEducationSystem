@@ -11,6 +11,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView userRegistration(ModelAndView modelAndView) {
+        modelAndView.setViewName("redirect:/page/main");
         return modelAndView;
     }
 }
