@@ -35,11 +35,11 @@
         </div>
     </div>
 </nav>
-    <div align="center">
+    <div align="center" style="margin-top: 60px">
         <h2>Навчальна система по книзі</h2>
         <img src="resources/img/cbook.png"/>
         <br/>
-        <b>Практикум з мови програмування Сі</b>
+        <h4>Практикум з мови програмування Сі</h4>
         <br/>
         Автори: Глибовець М.М., Глибовець А.М., Проценко В.С.
     </div>
