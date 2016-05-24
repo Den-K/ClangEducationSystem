@@ -23,10 +23,10 @@
         </div>
     </div>
 </nav>
-<div class="container" style="position: fixed; margin-left: 28%">
+<div class="container">
     <div class="row">
-        <div class="col-lg-6">
-            <div class="well" style="margin-top: 50px">
+        <div class="center-block" style="width: 650px">
+            <div class="well" style="margin-top: 60px">
                 <form class="form-horizontal" action="${pageContext.request.contextPath}/user/registration"
                       method="post">
                     <fieldset>
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-8 col-lg-offset-6">
+                            <div class="col-lg-6 col-lg-offset-3">
                                 <button type="reset" class="btn btn-default">Стерти</button>
                                 <button type="submit" class="btn btn-primary">Підтвердити</button>
                             </div>
