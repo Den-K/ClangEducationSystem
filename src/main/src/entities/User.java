@@ -2,55 +2,46 @@ package entities;
 
 public class User {
 
-    private int id;
-
-    private String email;
+    private String login;
 
     private String firstName;
 
     private String lastName;
 
-    public User(int id, String firstName, String lastName, String email)
+    public User(String login, String firstName, String lastName)
     {
-        this.id = id;
+        this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
     }
 
-    public int getId()
+    public String getLogin()
     {
-        return id;
+        return login;
     }
 
-    public void setId(int id)
+    public void setLogin(String login)
     {
-        this.id = id;
+        this.login = login;
     }
 
-    public String getEmail()
+    public String getFirstName()
     {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
-    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName)
+    {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
+    public String getLastName()
+    {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(String lastName)
+    {
         this.lastName = lastName;
     }
 
@@ -58,10 +49,9 @@ public class User {
     public String toString()
     {
         return "User{" +
-                "id=" + id +
+                "login='" + login + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
                 '}';
     }
 }

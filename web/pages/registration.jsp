@@ -30,6 +30,12 @@
                 <form class="form-horizontal" action="${pageContext.request.contextPath}/user/registration"
                       method="post">
                     <fieldset>
+                        <div class="form-group">
+                            <label for="login" class="col-lg-3 control-label">Логін</label>
+                            <div class="col-lg-8">
+                                <input required="required" class="form-control" id="login" placeholder="Логін" type="text">
+                            </div>
+                        </div>
                         <legend><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<b>Реєстрація</b></legend>
                         <div class="form-group">
                             <label for="firstName" class="col-lg-3 control-label">Ім'я</label>
@@ -41,12 +47,6 @@
                             <label for="lastName" class="col-lg-3 control-label">Прізвище</label>
                             <div class="col-lg-8">
                                 <input required="required" class="form-control" id="lastName" placeholder="Прізвище" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="col-lg-3 control-label">Пошта</label>
-                            <div class="col-lg-8">
-                                <input required="required" class="form-control" id="email" placeholder="Пошта" type="email">
                             </div>
                         </div>
                         <div class="form-group">
