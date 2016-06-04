@@ -21,7 +21,7 @@ public class PageController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/main", method = RequestMethod.POST)
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
     public ModelAndView mainPage(ModelAndView modelAndView) {
         modelAndView.setViewName("main");
         return modelAndView;
