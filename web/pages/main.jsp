@@ -66,39 +66,6 @@
     </div>
 </div>
 
-
-
-
-
-
-
-<!--
-
-        <li>
-            <label class="tree-toggler nav-header">
-                Розділ 1. Вступ
-            </label>
-            <ul class="nav  tree active-trial" style="display: none;">
-                <li>Характеристика мови Сі</li>
-                <li>Історія Сі</li>
-                <li>Організація програми</li>
-
-            </ul>
-        </li>
-        <li class="nav-divider"></li>
-        <li>
-            <label class="tree-toggler nav-header">
-                Розділ 2. Дані
-            </label>
-            <ul class="nav  tree active-trial" style="display: none;">
-                <li>Типи даних</li>
-                <li>Опис даних цілого типу</li>
-                <li>Беззнакові цілі</li>
-
-            </ul>
-        </li>
-
--->
 <script>
     $('label.tree-toggler').click(function () {
         $(this).parent().children('ul.tree').toggle(300);
