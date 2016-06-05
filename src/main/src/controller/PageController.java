@@ -1,6 +1,6 @@
 package controller;
 
-import main.src.dal.PartEntity;
+import dal.entities.PartEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
