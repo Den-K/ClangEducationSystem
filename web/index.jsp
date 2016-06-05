@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.css"/>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="resources/bootstrap/js/bootstrap.js"></script>
+    <meta charset="utf-8">
 </head>
 <body>
 <%--Navigation bar--%>
