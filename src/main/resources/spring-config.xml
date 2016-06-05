@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security-4.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="dal.dao dal.entities"/>
+    <context:component-scan base-package="dal"/>
     <context:annotation-config/>
 
     <bean id="userDao" class="dal.dao.UserDao">
@@ -21,6 +21,7 @@
         <property name="username" value="postgres" />
         <property name="password" value="postgres" />
     </bean>
+
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 
         <property name="dataSource" ref="dataSource" />
@@ -29,7 +30,6 @@
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
                 <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-
             </props>
         </property>
     </bean>

@@ -1,5 +1,5 @@
 <%@ page import="org.hibernate.cfg.Configuration" %>
-<%@ page import="dal.entities.User.PartEntity" %>
+<%@ page import="dal.entities.PartEntity" %>
 <%@ page import="org.hibernate.*" %>
 <!DOCTYPE html>
 <html>
