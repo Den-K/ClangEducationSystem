@@ -1,3 +1,6 @@
+<%@ page import="org.hibernate.cfg.Configuration" %>
+<%@ page import="main.dal.PartEntity" %>
+<%@ page import="org.hibernate.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +32,32 @@
     </div>
 </nav>
 
+<%
+    Configuration cfg = new Configuration();
+    cfg.configure("sessionFactory.xml");// populates the data of the
+    // configuration file
+
+    // creating seession factory object
+    SessionFactory factory = cfg.buildSessionFactory();
+
+
+
+    // creating session object
+    Session session2 = factory.openSession();
+
+    // creating transaction object
+    Transaction t = session2.beginTransaction();
+
+    Criteria query = session2.createCriteria(PartEntity.class);
+    java.util.List<PartEntity> list = query.list();
+%>
+
+
+<% for (PartEntity part: list) {
+   out.println(part.getName());
+} %>
+
+<!--
 <div class="col-lg-3">
     <div class="well well-lg">
     <ul class="nav">
@@ -58,7 +87,7 @@
     </ul>
         </div>
 </div>
-
+-->
 <script>
     $('label.tree-toggler').click(function () {
         $(this).parent().children('ul.tree').toggle(300);

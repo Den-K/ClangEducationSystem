@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+
+    <property name="hibernate.dialect">
+      org.hibernate.dialect.ProgressDialect
+    </property>
+
+    <!-- Assume test is the database name -->
+    <property name="hibernate.connection.username">
+      postgres
+    </property>
+    <property name="hibernate.connection.password">
+      postgres
+    </property>
+    <property name="connection.url">jdbc:postgresql://localhost:5432/CLangEduSystem</property>
+    <property name="connection.driver_class">org.postgresql.Driver</property>
+    <mapping class="main.dal.ParagraphEntity"/>
+    <mapping class="main.dal.PartEntity"/>
+    <mapping class="main.dal.RolesEntity"/>
+    <mapping class="main.dal.TextTypeEntity"/>
+    <mapping class="main.dal.UserRolesEntity"/>
+    <mapping class="main.dal.UsersEntity"/>
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+
+
+
+  </session-factory>
+
+
+</hibernate-configuration>
