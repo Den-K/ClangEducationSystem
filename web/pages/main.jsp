@@ -21,13 +21,23 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#">
-                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Користувач
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<%=request.getParameter("login")%>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<div class="col-lg-2">
+    <div class="bs-component">
+        <div class="list-group">
+            <span class="list-group-item active"><b>Розділи</b></span>
+            <a href="#" class="list-group-item">Розділ 1. Вступ</a>
+            <a href="#" class="list-group-item">Розділ 2. Дані</a>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

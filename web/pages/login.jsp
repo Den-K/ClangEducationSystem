@@ -58,8 +58,8 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-6 col-lg-offset-3">
-                                <input name="reset" type="reset" class="btn btn-default"/>
-                                <input name="submit" type="submit" class="btn btn-primary"/>
+                                <input value="Стерти" name="reset" type="reset" class="btn btn-default"/>
+                                <input value="Підтвердити" name="submit" type="submit" class="btn btn-primary"/>
                             </div>
                         </div>
                     </fieldset>
