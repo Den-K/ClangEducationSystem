@@ -18,12 +18,12 @@
     </property>
     <property name="connection.url">jdbc:postgresql://localhost:5432/CLangEduSystem</property>
     <property name="connection.driver_class">org.postgresql.Driver</property>
-    <mapping class="main.dal.ParagraphEntity"/>
-    <mapping class="main.dal.PartEntity"/>
-    <mapping class="main.dal.RolesEntity"/>
-    <mapping class="main.dal.TextTypeEntity"/>
-    <mapping class="main.dal.UserRolesEntity"/>
-    <mapping class="main.dal.UsersEntity"/>
+    <mapping class="main.src.dal.ParagraphEntity"/>
+    <mapping class="main.src.dal.PartEntity"/>
+    <mapping class="main.src.dal.RolesEntity"/>
+    <mapping class="main.src.dal.TextTypeEntity"/>
+    <mapping class="main.src.dal.UserRolesEntity"/>
+    <mapping class="main.src.dal.UsersEntity"/>
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
 

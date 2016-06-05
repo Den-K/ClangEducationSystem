@@ -1,4 +1,4 @@
-package main.dal;
+package main.src.dal;
 
 import javax.persistence.*;
 
