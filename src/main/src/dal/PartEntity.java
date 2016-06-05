@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "part")
 public class PartEntity {
     private int partId;
-    private int orderNo;
+    private Integer orderNo;
     private Integer parentId;
     private String name;
 
@@ -25,11 +25,11 @@ public class PartEntity {
 
     @Basic
     @Column(name = "order_no", nullable = true)
-    public int getOrderNo() {
+    public Integer getOrderNo() {
         return orderNo;
     }
 
-    public void setOrderNo(int orderNo) {
+    public void setOrderNo(Integer orderNo) {
         this.orderNo = orderNo;
     }
 

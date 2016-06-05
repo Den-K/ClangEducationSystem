@@ -1,6 +1,8 @@
 <%@ page import="org.hibernate.cfg.Configuration" %>
 <%@ page import="main.src.dal.PartEntity" %>
 <%@ page import="org.hibernate.*" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,35 +34,46 @@
     </div>
 </nav>
 
-<%
-    Configuration cfg = new Configuration();
-    cfg.configure("sessionFactory.xml");// populates the data of the
-    // configuration file
-
-    // creating seession factory object
-    SessionFactory factory = cfg.buildSessionFactory();
-
-
-
-    // creating session object
-    Session session2 = factory.openSession();
-
-    // creating transaction object
-    Transaction t = session2.beginTransaction();
-
-    Criteria query = session2.createCriteria(PartEntity.class);
-    java.util.List<PartEntity> list = query.list();
-%>
-
-
-<% for (PartEntity part: list) {
-   out.println(part.getName());
-} %>
-
-<!--
 <div class="col-lg-3">
     <div class="well well-lg">
-    <ul class="nav">
+        <ul class="nav">
+            <c:forEach items="${parts}" var="part">
+                <c:if test="${part.getParentId() == null}">
+
+                    <c:if test="${part.getPartId() != 1}">
+
+                            </ul>
+                        </li>
+                        <li class="nav-divider"></li>
+
+                    </c:if>
+                    <li>
+                        <label class="tree-toggler nav-header">
+                            <c:out value="${part.getName()}"/>
+                        </label>
+                        <ul class="nav tree active-trial" style="display: none;">
+                </c:if>
+
+                    <c:if test="${part.getParentId() != null}">
+                        <li><c:out value="${part.getName()}"/></li>
+                    </c:if>
+
+
+        </c:forEach>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!--
+
         <li>
             <label class="tree-toggler nav-header">
                 Розділ 1. Вступ
@@ -84,9 +97,7 @@
 
             </ul>
         </li>
-    </ul>
-        </div>
-</div>
+
 -->
 <script>
     $('label.tree-toggler').click(function () {
