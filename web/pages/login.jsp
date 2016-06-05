@@ -8,13 +8,12 @@
 
 <%
     String error = null;
-    String errorFlag = (String) request.getAttribute("error");
+    String errorFlag = request.getParameter("error");
     if (errorFlag != null && errorFlag.trim().equals("true"))
     {
-        error = "Не вірний логін чи пароль";
+        error = "Не вірно введений логін чи пароль";
     }
 %>
-
 <body>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -64,13 +63,16 @@
                     </fieldset>
                 </form>
             </div>
+            <%
+                if (error != null) {
+            %>
+            <div class="alert alert-dismissible alert-danger" align="center">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><%=error%>!</strong>
+            </div>
+            <%}%>
         </div>
     </div>
 </div>
-<%
-    if (error != null) {
-%>
-<%=error%>
-<%}%>
 </body>
 </html>
