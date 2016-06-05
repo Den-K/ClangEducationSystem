@@ -1,5 +1,6 @@
 package controller;
 
+import dal.entities.ParagraphEntity;
 import dal.entities.PartEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -100,6 +101,12 @@ public class PageController {
         });
 
         modelAndView.getModelMap().put("parts", parts);
+
+        criteria = session.createCriteria(ParagraphEntity.class);
+        java.util.List<ParagraphEntity> paragraphs = criteria.list();
+
+        modelAndView.getModelMap().put("paragraphs", paragraphs);
+
         modelAndView.setViewName("main");
         return modelAndView;
     }

@@ -72,5 +72,13 @@
     });
 </script>
 
+<div class="col-lg-9">
+    <c:forEach items="${paragraphs}" var="paragraph">
+        <p>
+            <c:out value="${paragraph.getText()}"/>
+        </p>
+    </c:forEach>
+</div>
+
 </body>
 </html>
