@@ -7,15 +7,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.mapping.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("page")
@@ -50,7 +47,7 @@ public class PageController {
         Transaction t = session.beginTransaction();
 
         Criteria criteria = session.createCriteria(PartEntity.class);
-        java.util.List<PartEntity> parts = criteria.list();
+        List<PartEntity> parts = criteria.list();
 
         final Map<Integer,PartEntity> parents = new HashMap<>();
 
@@ -103,7 +100,7 @@ public class PageController {
         modelAndView.getModelMap().put("parts", parts);
 
         criteria = session.createCriteria(ParagraphEntity.class);
-        java.util.List<ParagraphEntity> paragraphs = criteria.list();
+        List<ParagraphEntity> paragraphs = criteria.list();
 
         modelAndView.getModelMap().put("paragraphs", paragraphs);
 

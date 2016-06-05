@@ -1,7 +1,3 @@
-<%@ page import="org.hibernate.cfg.Configuration" %>
-<%@ page import="dal.entities.PartEntity" %>
-<%@ page import="org.hibernate.*" %>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -42,30 +38,23 @@
         <ul class="nav">
             <c:forEach items="${parts}" var="part">
                 <c:if test="${part.getParentId() == null}">
-
                     <c:if test="${part.getPartId() != 1}">
-
-                            </ul>
-                        </li>
-                        <li class="nav-divider"></li>
-
+        </ul>
+        <li class="nav-divider"></li>
                     </c:if>
-                    <li>
-                        <label class="tree-toggler nav-header">
-                            <c:out value="${part.getName()}"/>
-                        </label>
-                        <ul class="nav tree active-trial" style="display: none;">
+        <li>
+            <label class="tree-toggler nav-header">
+                <a href="#"><c:out value="${part.getName()}"/></a>
+            </label>
+            <ul class="nav tree active-trial" style="display: none;">
                 </c:if>
 
-                    <c:if test="${part.getParentId() != null}">
-                        <li><c:out value="${part.getName()}"/></li>
-                    </c:if>
-
-
-        </c:forEach>
-                </ul>
-            </li>
-        </ul>
+                <c:if test="${part.getParentId() != null}">
+                    <li><a href="#"><c:out value="${part.getName()}"/></a></li>
+                </c:if>
+             </c:forEach>
+            </ul>
+        </li>
     </div>
 </div>
 
@@ -81,6 +70,46 @@
             <c:out value="${paragraph.getText()}"/>
         </p>
     </c:forEach>
+    <pre>
+        <code class="c++">
+#include &#60;stdio.h&#62;
+#include ”file1.c’’
+#include ”file2.c’’
+float res;
+main()
+{
+     int a,b;
+     float mida(), midg();
+     printf(”введіть 2 цілих числа \n’’);
+     scanf((”%d,%d’’, &a,&b);
+     if (a*b>0)
+     {
+       midg(a,b);
+       printf(”\n середнє геометричне дорівнює %5.4f’’, res);
+     }
+     else
+     {
+       mida(a,b);
+       printf(”\n середнє арифметичне дорівнює %5.4f’’, res);
+     }
+де в файлі file1.c міститься   функція
+ float mida(x,y);
+  int x,y;
+   {
+     extern float res;
+     res=(x+y)/2;
+     return(res)
+   }
+а в файлі file2.c міститься  функція
+ float midg(x,y);
+  int x,y;
+   {
+     extern float res;
+     res=sqrt(x*y);
+     return(res)
+   }
+        </code>
+    </pre>
 </div>
 
 </body>
