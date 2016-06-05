@@ -8,6 +8,9 @@
 <head>
     <title>Головна - Навчальна система - Мова Сі</title>
     <%@ include file="include_resources.jsp" %>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/highlight/styles/color-brewer.css">
+    <script src="${pageContext.request.contextPath}/resources/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
 <%--Navigation bar--%>
