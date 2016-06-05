@@ -29,15 +29,41 @@
     </div>
 </nav>
 
-<div class="col-lg-2">
-    <div class="bs-component">
-        <div class="list-group">
-            <span class="list-group-item active"><b>Розділи</b></span>
-            <a href="#" class="list-group-item">Розділ 1. Вступ</a>
-            <a href="#" class="list-group-item">Розділ 2. Дані</a>
+<div class="col-lg-3">
+    <div class="well well-lg">
+    <ul class="nav">
+        <li>
+            <label class="tree-toggler nav-header">
+                Розділ 1. Вступ
+            </label>
+            <ul class="nav  tree active-trial" style="display: none;">
+                <li>Характеристика мови Сі</li>
+                <li>Історія Сі</li>
+                <li>Організація програми</li>
+
+            </ul>
+        </li>
+        <li class="nav-divider"></li>
+        <li>
+            <label class="tree-toggler nav-header">
+                Розділ 2. Дані
+            </label>
+            <ul class="nav  tree active-trial" style="display: none;">
+                <li>Типи даних</li>
+                <li>Опис даних цілого типу</li>
+                <li>Беззнакові цілі</li>
+
+            </ul>
+        </li>
+    </ul>
         </div>
-    </div>
 </div>
+
+<script>
+    $('label.tree-toggler').click(function () {
+        $(this).parent().children('ul.tree').toggle(300);
+    });
+</script>
 
 </body>
 </html>
