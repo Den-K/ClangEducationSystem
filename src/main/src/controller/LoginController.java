@@ -20,12 +20,6 @@ public class LoginController
         return modelAndView;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView loginPage(ModelAndView modelAndView) {
-        modelAndView.setViewName("login");
-        return modelAndView;
-    }
-
     @RequestMapping(value = "/loginError", method = RequestMethod.GET)
     public ModelAndView loginError(ModelAndView modelAndView)
     {

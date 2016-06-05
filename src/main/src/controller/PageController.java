@@ -26,12 +26,4 @@ public class PageController {
         modelAndView.setViewName("main");
         return modelAndView;
     }
-
-    @RequestMapping(value = "/loginError", method = RequestMethod.GET)
-    public ModelAndView loginError(ModelAndView modelAndView)
-    {
-        modelAndView.addObject("error", "true");
-        modelAndView.setViewName("redirect:/page/login");
-        return modelAndView;
-    }
 }

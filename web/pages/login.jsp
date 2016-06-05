@@ -38,8 +38,7 @@
     <div class="row">
         <div class="center-block" style="width: 650px">
             <div class="well" style="margin-top: 60px">
-                <form name="loginForm" class="form-horizontal" action="<c:url value='/j_spring_security_check' />"
-                      method="POST">
+                <form name="loginForm" class="form-horizontal" action="<c:url value='/j_spring_security_check'/>" method="POST">
                     <fieldset>
                         <legend><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;<b>Вхід</b></legend>
                         <div class="form-group">
