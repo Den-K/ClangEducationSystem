@@ -1,5 +1,5 @@
 <%@ page import="org.hibernate.cfg.Configuration" %>
-<%@ page import="main.src.dal.PartEntity" %>
+<%@ page import="dal.entities.PartEntity" %>
 <%@ page import="org.hibernate.*" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
