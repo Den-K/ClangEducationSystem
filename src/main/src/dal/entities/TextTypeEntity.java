@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "text_type")
-public class TextTypeEntity {
+public class TextTypeEntity implements BaseEntity{
     private int textTypeId;
     private String textTypeName;
 

@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "paragraph")
-public class ParagraphEntity {
+public class ParagraphEntity implements BaseEntity {
     private int paragraphId;
     private int partId;
     private String text;

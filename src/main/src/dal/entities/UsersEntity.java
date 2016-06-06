@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "users")
-public class UsersEntity {
+public class UsersEntity implements BaseEntity{
     private int id;
     private String login;
     private String name;

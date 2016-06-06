@@ -43,7 +43,7 @@
                         <div class="form-group">
                             <label for="login" class="col-lg-3 control-label">Логін</label>
                             <div class="col-lg-8">
-                                <input required="required" class="form-control" name="username" id="login" placeholder="Логін"
+                                <input required="required" class="form-control" name="login" id="login" placeholder="Логін"
                                        type="text">
                             </div>
                         </div>

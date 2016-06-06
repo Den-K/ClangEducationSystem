@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "part")
-public class PartEntity {
+public class PartEntity implements BaseEntity{
     private int partId;
     private Integer orderNo;
     private Integer parentId;

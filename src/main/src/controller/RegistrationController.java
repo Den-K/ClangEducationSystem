@@ -27,9 +27,10 @@ public class RegistrationController {
 
         UsersEntity usersEntity = new UsersEntity();
         usersEntity.setLogin(login);
+        usersEntity.setPassword(password);
         usersEntity.setName(firstName);
         usersEntity.setSurname(lastName);
-        userDao.add(usersEntity,password);
+        userDao.add(usersEntity);
 
         return modelAndView;
     }
