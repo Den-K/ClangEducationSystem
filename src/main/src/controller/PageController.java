@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,8 +32,18 @@ public class PageController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/loginError", method = RequestMethod.GET)
+    public ModelAndView loginError(ModelAndView modelAndView) {
+        modelAndView.addObject("error", "true");
+        modelAndView.setViewName("login");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public ModelAndView mainPage(ModelAndView modelAndView) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        modelAndView.addObject("login", auth.getName());
 
         Configuration cfg = new Configuration();
         cfg.configure("sessionFactory.xml");// populates the data of the

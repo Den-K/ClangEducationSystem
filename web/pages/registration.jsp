@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,6 +65,12 @@
                     </fieldset>
                 </form>
             </div>
+            <c:if test="${duplicate_error != null}">
+                <div class="alert alert-dismissible alert-danger" align="center">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    Користувач з логіном <strong><c:out value="${duplicate_error}"/></strong> вже існує!
+                </div>
+            </c:if>
         </div>
     </div>
 </div>

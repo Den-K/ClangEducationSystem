@@ -42,8 +42,8 @@
         <security:intercept-url pattern="/page/main**" access="hasRole('ROLE_USER')" />
         <security:form-login
                 login-page="/page/login"
-                default-target-url="/login/main"
-                authentication-failure-url="/login/loginError"
+                default-target-url="/page/main"
+                authentication-failure-url="/page/loginError"
                 login-processing-url="/j_spring_security_check"
                 username-parameter="login"
                 password-parameter="password"/>

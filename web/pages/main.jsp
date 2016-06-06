@@ -25,7 +25,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#">
-                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<%=request.getParameter("login")%>
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<c:out value="${login}"/>
                     </a>
                 </li>
             </ul>
