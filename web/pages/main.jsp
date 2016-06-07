@@ -69,12 +69,6 @@
     </div>
 </div>
 
-<script>
-    $('label.tree-toggler.glyphicon-plus').click(function () {
-        $(this).parent().children('ul.tree').toggle(300);
-    });
-</script>
-
 <div class="col-lg-9">
 
     <c:forEach items="${parts}" var="part">
