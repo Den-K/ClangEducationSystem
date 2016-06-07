@@ -42,7 +42,14 @@
                 </c:if>
                 <li>
                     <label class="tree-toggler nav-header">
-                        <a href="#"><c:out value="${part.getName()}"/></a>
+                        <a
+                                href="#"
+                                onclick="{
+                                        $('.part').hide();
+                                        $('#part<c:out value="${part.getPartId()}"/>').show();
+                                        }">
+                            <c:out value="${part.getName()}"/>
+                        </a>
                     </label>
                     <ul class="nav tree active-trial" style="display: none;">
                         <c:forEach items="${part.getChildrenParts()}" var="childPart">
@@ -64,7 +71,7 @@
 <div class="col-lg-9">
 
     <c:forEach items="${parts}" var="part">
-        <div>
+        <div id="part<c:out value="${part.getPartId()}"/>" class="part" style="display: none">
             <c:forEach items="${part.getChildrenParts()}" var="childPart">
                 <h4><c:out value="${childPart.getName()}"/></h4>
                 <c:forEach items="${childPart.getChildrenParagraphs()}" var="paragraph">
@@ -73,7 +80,6 @@
             </c:forEach>
         </div>
     </c:forEach>
-
 
     <pre>
         <code class="c++">
