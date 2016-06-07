@@ -1,6 +1,8 @@
 package dal.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by alex on 05.06.16.
@@ -34,7 +36,7 @@ public class PartEntity implements BaseEntity{
     }
 
     @Basic
-    @Column(name = "parent_id", nullable = true)
+    @Column(name = "parent_id", nullable = true, insertable = false, updatable = false)
     public Integer getParentId() {
         return parentId;
     }
@@ -52,6 +54,12 @@ public class PartEntity implements BaseEntity{
     public void setName(String name) {
         this.name = name;
     }
+
+
+    private PartEntity parent;
+
+
+    private Set<PartEntity> childrenParts = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -75,5 +83,24 @@ public class PartEntity implements BaseEntity{
         result = 31 * result + parentId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy="parent", cascade = CascadeType.ALL)
+    public Set<PartEntity> getChildrenParts() {
+        return childrenParts;
+    }
+
+    public void setChildrenParts(Set<PartEntity> childrenParts) {
+        this.childrenParts = childrenParts;
+    }
+
+    @ManyToOne(cascade={CascadeType.ALL})
+    @JoinColumn(name="parent_id")
+    public PartEntity getParent() {
+        return parent;
+    }
+
+    public void setParent(PartEntity parent) {
+        this.parent = parent;
     }
 }

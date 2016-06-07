@@ -61,55 +61,17 @@ public class PageController {
         Criteria criteria = session.createCriteria(PartEntity.class);
         List<PartEntity> parts = criteria.list();
 
-        final Map<Integer,PartEntity> parents = new HashMap<>();
+        List<PartEntity> rootParts = new ArrayList<>();
 
-        for (PartEntity part:parts) {
-            parents.put(part.getPartId(), part);
+        for (PartEntity part:
+             parts) {
+            if(part.getParentId() == null)
+            {
+                rootParts.add(part);
+            }
         }
 
-        Collections.sort(parts, new Comparator<PartEntity>() {
-            @Override
-            public int compare(PartEntity o1, PartEntity o2) {
-                Integer parentId1 = o1.getParentId();
-                Integer parentId2 = o2.getParentId();
-
-                if(parentId1 == null && parentId2 == null) {
-                    return o1.getOrderNo().compareTo(o2.getOrderNo());
-                }
-
-                PartEntity parent2 = null;
-
-                if(parentId2 != null) {
-                    parent2 = parents.get(o2.getParentId());
-                }
-
-                PartEntity parent1 = null;
-
-                if(parentId1 != null) {
-                    parent1 = parents.get(o1.getParentId());
-                }
-
-                Integer index1;
-                Integer index2;
-
-                if(parent1 == null) {
-                    index1 = o1.getOrderNo()*1000;
-                } else {
-                    index1 = parent1.getOrderNo() * 1000 + o1.getOrderNo();
-                }
-
-                if(parent2 == null) {
-                    index2 = o2.getOrderNo()*1000;
-                } else {
-                    index2 = parent2.getOrderNo() * 1000 + o2.getOrderNo();
-                }
-
-
-                return index1.compareTo(index2);
-            }
-        });
-
-        modelAndView.getModelMap().put("parts", parts);
+        modelAndView.getModelMap().put("parts", rootParts);
 
         criteria = session.createCriteria(ParagraphEntity.class);
         List<ParagraphEntity> paragraphs = criteria.list();

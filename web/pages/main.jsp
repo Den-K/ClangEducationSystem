@@ -37,24 +37,21 @@
     <div class="well well-lg">
         <ul class="nav">
             <c:forEach items="${parts}" var="part">
-                <c:if test="${part.getParentId() == null}">
-                    <c:if test="${part.getPartId() != 1}">
-        </ul>
-        <li class="nav-divider"></li>
-                    </c:if>
-        <li>
-            <label class="tree-toggler nav-header">
-                <a href="#"><c:out value="${part.getName()}"/></a>
-            </label>
-            <ul class="nav tree active-trial" style="display: none;">
+                <c:if test="${part.getPartId() != 1}">
+                    <li class="nav-divider"></li>
                 </c:if>
-
-                <c:if test="${part.getParentId() != null}">
-                    <li><a href="#"><c:out value="${part.getName()}"/></a></li>
-                </c:if>
-             </c:forEach>
-            </ul>
-        </li>
+                <li>
+                    <label class="tree-toggler nav-header">
+                        <a href="#"><c:out value="${part.getName()}"/></a>
+                    </label>
+                    <ul class="nav tree active-trial" style="display: none;">
+                        <c:forEach items="${part.getChildrenParts()}" var="childPart">
+                            <li><a href="#"><c:out value="${childPart.getName()}"/></a></li>
+                        </c:forEach>
+                    </ul>
+                </li>
+            </c:forEach>
+         </ul>
     </div>
 </div>
 
