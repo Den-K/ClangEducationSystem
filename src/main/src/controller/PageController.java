@@ -63,8 +63,7 @@ public class PageController {
 
         List<PartEntity> rootParts = new ArrayList<>();
 
-        for (PartEntity part:
-             parts) {
+        for (PartEntity part:parts) {
             if(part.getParentId() == null)
             {
                 rootParts.add(part);
@@ -72,11 +71,6 @@ public class PageController {
         }
 
         modelAndView.getModelMap().put("parts", rootParts);
-
-        criteria = session.createCriteria(ParagraphEntity.class);
-        List<ParagraphEntity> paragraphs = criteria.list();
-
-        modelAndView.getModelMap().put("paragraphs", paragraphs);
 
         modelAndView.setViewName("main");
         return modelAndView;

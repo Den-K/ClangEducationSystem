@@ -14,6 +14,9 @@ public class PartEntity implements BaseEntity{
     private Integer orderNo;
     private Integer parentId;
     private String name;
+    private PartEntity parent;
+    private Set<PartEntity> childrenParts = new HashSet<>();
+    private Set<ParagraphEntity> childrenParagraphs = new HashSet<>();
 
     @Id
     @Column(name = "part_id", nullable = false)
@@ -55,12 +58,6 @@ public class PartEntity implements BaseEntity{
         this.name = name;
     }
 
-
-    private PartEntity parent;
-
-
-    private Set<PartEntity> childrenParts = new HashSet<>();
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,6 +82,7 @@ public class PartEntity implements BaseEntity{
         return result;
     }
 
+
     @OneToMany(mappedBy="parent", cascade = CascadeType.ALL)
     public Set<PartEntity> getChildrenParts() {
         return childrenParts;
@@ -102,5 +100,14 @@ public class PartEntity implements BaseEntity{
 
     public void setParent(PartEntity parent) {
         this.parent = parent;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "partId")
+    public Set<ParagraphEntity> getChildrenParagraphs() {
+        return childrenParagraphs;
+    }
+
+    public void setChildrenParagraphs(Set<ParagraphEntity> childrenParagraphs) {
+        this.childrenParagraphs = childrenParagraphs;
     }
 }

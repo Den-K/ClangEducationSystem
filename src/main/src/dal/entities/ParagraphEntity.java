@@ -13,6 +13,7 @@ public class ParagraphEntity implements BaseEntity {
     private String text;
     private int textTypeId;
     private int orderNo;
+    private PartEntity partEntity;
 
     @Id
     @Column(name = "paragraph_id", nullable = false)
@@ -25,7 +26,7 @@ public class ParagraphEntity implements BaseEntity {
     }
 
     @Basic
-    @Column(name = "part_id", nullable = true)
+    @Column(name = "part_id", nullable = true, insertable = false, updatable = false)
     public int getPartId() {
         return partId;
     }
@@ -88,5 +89,15 @@ public class ParagraphEntity implements BaseEntity {
         result = 31 * result + textTypeId;
         result = 31 * result + orderNo;
         return result;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "part_id", nullable = false)
+    public PartEntity getPartEntity() {
+        return partEntity;
+    }
+
+    public void setPartEntity(PartEntity partEntity) {
+        this.partEntity = partEntity;
     }
 }

@@ -62,11 +62,19 @@
 </script>
 
 <div class="col-lg-9">
-    <c:forEach items="${paragraphs}" var="paragraph">
-        <p>
-            <c:out value="${paragraph.getText()}"/>
-        </p>
+
+    <c:forEach items="${parts}" var="part">
+        <div>
+            <c:forEach items="${part.getChildrenParts()}" var="childPart">
+                <h4><c:out value="${childPart.getName()}"/></h4>
+                <c:forEach items="${childPart.getChildrenParagraphs()}" var="paragraph">
+                    <p><c:out value="${paragraph.getText()}"/></p>
+                </c:forEach>
+            </c:forEach>
+        </div>
     </c:forEach>
+
+
     <pre>
         <code class="c++">
 #include &#60;stdio.h&#62;
