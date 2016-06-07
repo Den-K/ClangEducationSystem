@@ -42,6 +42,10 @@
                 </c:if>
                 <li>
                     <label class="tree-toggler nav-header">
+                        <a href="#"
+                           onclick="$('#menuPart<c:out value="${part.getPartId()}"/>').toggle(300);">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
                         <a
                                 href="#"
                                 onclick="{
@@ -51,7 +55,10 @@
                             <c:out value="${part.getName()}"/>
                         </a>
                     </label>
-                    <ul class="nav tree active-trial" style="display: none;">
+                    <ul id="menuPart<c:out value="${part.getPartId()}"/>"
+                        class="nav tree active-trial"
+                        style="display: none;">
+
                         <c:forEach items="${part.getChildrenParts()}" var="childPart">
                             <li><a href="#"><c:out value="${childPart.getName()}"/></a></li>
                         </c:forEach>
@@ -63,7 +70,7 @@
 </div>
 
 <script>
-    $('label.tree-toggler').click(function () {
+    $('label.tree-toggler.glyphicon-plus').click(function () {
         $(this).parent().children('ul.tree').toggle(300);
     });
 </script>
@@ -75,7 +82,9 @@
             <c:forEach items="${part.getChildrenParts()}" var="childPart">
                 <h4><c:out value="${childPart.getName()}"/></h4>
                 <c:forEach items="${childPart.getChildrenParagraphs()}" var="paragraph">
-                    <p><c:out value="${paragraph.getText()}"/></p>
+                    <p>
+                        <c:out value="${paragraph.getText()}"/>
+                    </p>
                 </c:forEach>
             </c:forEach>
         </div>
