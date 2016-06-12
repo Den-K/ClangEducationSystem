@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -28,6 +29,7 @@ public class UserDao extends BaseDao<UsersEntity> {
     }
 
     @Override
+    @Transactional
     public void add(UsersEntity user) throws DuplicateKeyException {
         if (!userExists(user.getLogin())) {
             Map<String, Object> parameters = new HashMap<>(5);

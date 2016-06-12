@@ -1,11 +1,8 @@
 package controller;
 
-import dal.entities.ParagraphEntity;
 import dal.entities.PartEntity;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import dal.entities.UsersEntity;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("page")
+
 public class PageController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -57,6 +56,12 @@ public class PageController {
 
         // creating transaction object
         Transaction t = session.beginTransaction();
+
+        Query query= session.createQuery("from UsersEntity where login=:login");
+        query.setParameter("login", auth.getName());
+        UsersEntity user = (UsersEntity) query.uniqueResult();
+
+        System.out.println(user.getName());
 
         Criteria criteria = session.createCriteria(PartEntity.class);
         List<PartEntity> parts = criteria.list();
