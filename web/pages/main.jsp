@@ -38,7 +38,7 @@
         </div>
     </div>
 </nav>
-
+<%--menu--%>
 <div class="col-lg-3">
     <div class="well well-lg">
         <ul class="nav">
@@ -48,11 +48,9 @@
                 </c:if>
                 <li>
                     <label class="tree-toggler nav-header">
-                        <a
-                                href="#"
-                                onclick="{
-                                        $('.part').hide();
-                                        $('#part<c:out value="${part.getPartId()}"/>').show();
+                        <a href="#" onclick="{
+                                            $('.part').hide();
+                                            $('#part<c:out value="${part.getPartId()}"/>').show();
                                         }">
                             <c:out value="${part.getName()}"/>
                         </a>
@@ -67,7 +65,14 @@
                         style="display: none;">
 
                         <c:forEach items="${part.getChildrenParts()}" var="childPart">
-                            <li><a href="#"><c:out value="${childPart.getName()}"/></a></li>
+                            <li>
+                                <a href="#part<c:out value="${childPart.getPartId()}"/>" onclick="{
+                                        $('.part').hide();
+                                        $('#part<c:out value="${part.getPartId()}"/>').show();
+                                        }"">
+                                    <c:out value="${childPart.getName()}"/>
+                                </a>
+                            </li>
                         </c:forEach>
                     </ul>
                 </li>
@@ -75,14 +80,14 @@
         </ul>
     </div>
 </div>
-
+<%--page data--%>
 <div class="scroll-container">
     <div class="col-lg-12">
 
         <c:forEach items="${parts}" var="part">
             <div id="part<c:out value="${part.getPartId()}"/>" class="part" style="display: none">
                 <c:forEach items="${part.getChildrenParts()}" var="childPart">
-                    <h4><c:out value="${childPart.getName()}"/></h4>
+                    <h4 id="part<c:out value="${childPart.getPartId()}"/>"><c:out value="${childPart.getName()}"/></h4>
                     <c:forEach items="${childPart.getChildrenParagraphs()}" var="paragraph">
                         <p>
                             <c:out value="${paragraph.getText()}"/>
