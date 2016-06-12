@@ -15,6 +15,7 @@
     </style>
 </head>
 <body>
+<form name="logout" action="${pageContext.request.contextPath}/page/logout" method="post" ></form>
 <%--Navigation bar--%>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -36,7 +37,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Профіль</a></li>
-                        <li><a href="#">Вихід</a></li>
+                        <li><a href="javascript:document.forms['logout'].submit()">Вихід</a></li>
                     </ul>
                 </li>
             </ul>

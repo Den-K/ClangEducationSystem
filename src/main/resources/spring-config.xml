@@ -47,6 +47,9 @@
                 login-processing-url="/j_spring_security_check"
                 username-parameter="login"
                 password-parameter="password"/>
+        <security:session-management>
+            <security:concurrency-control max-sessions="1"/>
+        </security:session-management>
     </security:http>
 
     <security:authentication-manager>

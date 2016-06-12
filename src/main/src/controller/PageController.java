@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,14 @@ public class PageController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView loginPage(ModelAndView modelAndView) {
+        modelAndView.setViewName("login");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public ModelAndView logout() {
+        SecurityContextHolder.getContext().setAuthentication(null);
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
     }
