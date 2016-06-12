@@ -42,7 +42,6 @@ public class PageController {
     public ModelAndView mainPage(ModelAndView modelAndView) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        modelAndView.addObject("login", auth.getName());
 
         Configuration cfg = new Configuration();
         cfg.configure("sessionFactory.xml");// populates the data of the
@@ -74,7 +73,7 @@ public class PageController {
         }
 
         modelAndView.getModelMap().put("parts", rootParts);
-
+        modelAndView.addObject("user", user);
         modelAndView.setViewName("main");
         return modelAndView;
     }

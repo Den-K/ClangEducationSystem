@@ -29,10 +29,15 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<c:out value="${login}"/>
+                <li class="dropdown">
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<c:out
+                            value="${user.getLogin()}"/><span class="caret"></span>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Профіль</a></li>
+                        <li><a href="#">Вихід</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -49,9 +54,9 @@
                 <li>
                     <label class="tree-toggler nav-header">
                         <a href="#part<c:out value="${part.getPartId()}"/>" onclick="{
-                                            $('.part').hide();
-                                            $('#part<c:out value="${part.getPartId()}"/>').show();
-                                        }">
+                                $('.part').hide();
+                                $('#part<c:out value="${part.getPartId()}"/>').show();
+                                }">
                             <c:out value="${part.getName()}"/>
                         </a>
                         &nbsp;
