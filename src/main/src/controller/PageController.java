@@ -61,8 +61,6 @@ public class PageController {
         query.setParameter("login", auth.getName());
         UsersEntity user = (UsersEntity) query.uniqueResult();
 
-        System.out.println(user.getName());
-
         Criteria criteria = session.createCriteria(PartEntity.class);
         List<PartEntity> parts = criteria.list();
 
