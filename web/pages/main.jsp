@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/highlight/styles/color-brewer.css">
     <script src="${pageContext.request.contextPath}/resources/highlight/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+    <style type="text/css">
+        .scroll-container {
+            height: 85vh;
+            overflow-y: scroll;
+        }
+    </style>
 </head>
 <body>
 <%--Navigation bar--%>
@@ -42,10 +48,6 @@
                 </c:if>
                 <li>
                     <label class="tree-toggler nav-header">
-                        <a href="#"
-                           onclick="$('#menuPart<c:out value="${part.getPartId()}"/>').toggle(300);">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </a>
                         <a
                                 href="#"
                                 onclick="{
@@ -53,6 +55,11 @@
                                         $('#part<c:out value="${part.getPartId()}"/>').show();
                                         }">
                             <c:out value="${part.getName()}"/>
+                        </a>
+                        &nbsp;
+                        <a href="#"
+                           onclick="$('#menuPart<c:out value="${part.getPartId()}"/>').toggle(300);">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
                         </a>
                     </label>
                     <ul id="menuPart<c:out value="${part.getPartId()}"/>"
@@ -65,24 +72,25 @@
                     </ul>
                 </li>
             </c:forEach>
-         </ul>
+        </ul>
     </div>
 </div>
 
-<div class="col-lg-9">
+<div class="scroll-container">
+    <div class="col-lg-12">
 
-    <c:forEach items="${parts}" var="part">
-        <div id="part<c:out value="${part.getPartId()}"/>" class="part" style="display: none">
-            <c:forEach items="${part.getChildrenParts()}" var="childPart">
-                <h4><c:out value="${childPart.getName()}"/></h4>
-                <c:forEach items="${childPart.getChildrenParagraphs()}" var="paragraph">
-                    <p>
-                        <c:out value="${paragraph.getText()}"/>
-                    </p>
+        <c:forEach items="${parts}" var="part">
+            <div id="part<c:out value="${part.getPartId()}"/>" class="part" style="display: none">
+                <c:forEach items="${part.getChildrenParts()}" var="childPart">
+                    <h4><c:out value="${childPart.getName()}"/></h4>
+                    <c:forEach items="${childPart.getChildrenParagraphs()}" var="paragraph">
+                        <p>
+                            <c:out value="${paragraph.getText()}"/>
+                        </p>
+                    </c:forEach>
                 </c:forEach>
-            </c:forEach>
-        </div>
-    </c:forEach>
+            </div>
+        </c:forEach>
 
     <pre>
         <code class="c++">
@@ -124,7 +132,7 @@ main()
    }
         </code>
     </pre>
+    </div>
 </div>
-
 </body>
 </html>
