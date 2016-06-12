@@ -103,6 +103,7 @@ public class PartEntity implements BaseEntity{
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "partId")
+    @OrderBy("orderNo")
     public Set<ParagraphEntity> getChildrenParagraphs() {
         return childrenParagraphs;
     }

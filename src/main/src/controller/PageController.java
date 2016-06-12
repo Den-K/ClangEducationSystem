@@ -4,6 +4,7 @@ import dal.entities.PartEntity;
 import dal.entities.UsersEntity;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Order;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -70,6 +71,7 @@ public class PageController {
         UsersEntity user = (UsersEntity) query.uniqueResult();
 
         Criteria criteria = session.createCriteria(PartEntity.class);
+        criteria.addOrder(Order.asc("orderNo"));
         List<PartEntity> parts = criteria.list();
 
         List<PartEntity> rootParts = new ArrayList<>();

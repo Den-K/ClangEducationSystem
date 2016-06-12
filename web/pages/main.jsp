@@ -96,53 +96,23 @@
                     <h4 id="part<c:out value="${childPart.getPartId()}"/>"><c:out value="${childPart.getName()}"/></h4>
                     <c:forEach items="${childPart.getChildrenParagraphs()}" var="paragraph">
                         <p>
-                            <c:out value="${paragraph.getText()}"/>
+                            <c:if test="${paragraph.getTextTypeId() == 1}">
+                                <c:out value="${paragraph.getText()}"/>
+                            </c:if>
+                            <c:if test="${paragraph.getTextTypeId() == 2}">
+                                <pre>
+                                    <code class="c++">
+<c:out value="${paragraph.getText()}"/>
+                                    </code>
+                                </pre>
+                            </c:if>
+
                         </p>
                     </c:forEach>
                 </c:forEach>
             </div>
         </c:forEach>
 
-    <pre>
-        <code class="c++">
-#include &#60;stdio.h&#62;
-#include ”file1.c’’
-#include ”file2.c’’
-float res;
-main()
-{
-     int a,b;
-     float mida(), midg();
-     printf(”введіть 2 цілих числа \n’’);
-     scanf((”%d,%d’’, &a,&b);
-     if (a*b>0)
-     {
-       midg(a,b);
-       printf(”\n середнє геометричне дорівнює %5.4f’’, res);
-     }
-     else
-     {
-       mida(a,b);
-       printf(”\n середнє арифметичне дорівнює %5.4f’’, res);
-     }
-де в файлі file1.c міститься   функція
- float mida(x,y);
-  int x,y;
-   {
-     extern float res;
-     res=(x+y)/2;
-     return(res)
-   }
-а в файлі file2.c міститься  функція
- float midg(x,y);
-  int x,y;
-   {
-     extern float res;
-     res=sqrt(x*y);
-     return(res)
-   }
-        </code>
-    </pre>
     </div>
 </div>
 </body>
