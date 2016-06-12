@@ -48,7 +48,7 @@
                 </c:if>
                 <li>
                     <label class="tree-toggler nav-header">
-                        <a href="#" onclick="{
+                        <a href="#part<c:out value="${part.getPartId()}"/>" onclick="{
                                             $('.part').hide();
                                             $('#part<c:out value="${part.getPartId()}"/>').show();
                                         }">
@@ -69,7 +69,7 @@
                                 <a href="#part<c:out value="${childPart.getPartId()}"/>" onclick="{
                                         $('.part').hide();
                                         $('#part<c:out value="${part.getPartId()}"/>').show();
-                                        }"">
+                                        }">
                                     <c:out value="${childPart.getName()}"/>
                                 </a>
                             </li>
