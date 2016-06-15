@@ -18,7 +18,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("page")
-
 public class PageController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
