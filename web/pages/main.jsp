@@ -94,7 +94,7 @@
                 <c:forEach items="${part.getChildrenParts()}" var="childPart">
                     <h4 id="part<c:out value="${childPart.getPartId()}"/>"><c:out value="${childPart.getName()}"/></h4>
                     <c:forEach items="${childPart.getChildrenParagraphs()}" var="paragraph">
-                        <c:if test="${paragraph.getTextTypeId() == 1}">
+                        <c:if test="${paragraph.getTextTypeId() == 1|| paragraph.getTextTypeId() == 5}">
                             <c:out escapeXml="false" value="${paragraph.getText()}"/>
                         </c:if>
                         <c:if test="${paragraph.getTextTypeId() == 2}">
