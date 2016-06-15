@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-<form name="logout" action="${pageContext.request.contextPath}/page/logout" method="post" ></form>
+<form name="logout" action="${pageContext.request.contextPath}/page/logout" method="post"></form>
 <%--Navigation bar--%>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -89,30 +89,25 @@
 <%--page data--%>
 <div class="scroll-container">
     <div class="col-lg-12">
-
         <c:forEach items="${parts}" var="part">
             <div id="part<c:out value="${part.getPartId()}"/>" class="part" style="display: none">
                 <c:forEach items="${part.getChildrenParts()}" var="childPart">
                     <h4 id="part<c:out value="${childPart.getPartId()}"/>"><c:out value="${childPart.getName()}"/></h4>
                     <c:forEach items="${childPart.getChildrenParagraphs()}" var="paragraph">
-                        <p>
-                            <c:if test="${paragraph.getTextTypeId() == 1}">
-                                <c:out value="${paragraph.getText()}"/>
-                            </c:if>
-                            <c:if test="${paragraph.getTextTypeId() == 2}">
+                        <c:if test="${paragraph.getTextTypeId() == 1}">
+                            <c:out escapeXml="false" value="${paragraph.getText()}"/>
+                        </c:if>
+                        <c:if test="${paragraph.getTextTypeId() == 2}">
                                 <pre>
                                     <code class="c++">
 <c:out value="${paragraph.getText()}"/>
                                     </code>
                                 </pre>
-                            </c:if>
-
-                        </p>
+                        </c:if>
                     </c:forEach>
                 </c:forEach>
             </div>
         </c:forEach>
-
     </div>
 </div>
 </body>
