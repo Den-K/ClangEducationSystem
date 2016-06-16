@@ -4,9 +4,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by alex on 05.06.16.
- */
+
 @Entity
 @Table(name = "part")
 public class PartEntity implements BaseEntity{
@@ -87,7 +85,6 @@ public class PartEntity implements BaseEntity{
     public Set<PartEntity> getChildrenParts() {
         return childrenParts;
     }
-
     public void setChildrenParts(Set<PartEntity> childrenParts) {
         this.childrenParts = childrenParts;
     }
@@ -97,7 +94,6 @@ public class PartEntity implements BaseEntity{
     public PartEntity getParent() {
         return parent;
     }
-
     public void setParent(PartEntity parent) {
         this.parent = parent;
     }
@@ -107,7 +103,6 @@ public class PartEntity implements BaseEntity{
     public Set<ParagraphEntity> getChildrenParagraphs() {
         return childrenParagraphs;
     }
-
     public void setChildrenParagraphs(Set<ParagraphEntity> childrenParagraphs) {
         this.childrenParagraphs = childrenParagraphs;
     }

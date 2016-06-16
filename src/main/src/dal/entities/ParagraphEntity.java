@@ -2,9 +2,6 @@ package dal.entities;
 
 import javax.persistence.*;
 
-/**
- * Created by alex on 05.06.16.
- */
 @Entity
 @Table(name = "paragraph")
 public class ParagraphEntity implements BaseEntity {
@@ -26,7 +23,7 @@ public class ParagraphEntity implements BaseEntity {
     }
 
     @Basic
-    @Column(name = "part_id", nullable = true, insertable = false, updatable = false)
+    @Column(name = "part_id", insertable = false, updatable = false)
     public int getPartId() {
         return partId;
     }
