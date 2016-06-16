@@ -16,6 +16,8 @@
     <mvc:resources mapping="/**" location="resources"/>
     <mvc:annotation-driven/>
 
+    <bean class="org.springframework.web.client.RestTemplate" />
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/pages/"/>
         <property name="suffix" value=".jsp"/>

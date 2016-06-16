@@ -96,6 +96,16 @@
                     <c:forEach items="${childPart.getChildrenParagraphs()}" var="paragraph">
                         <c:if test="${paragraph.getTextTypeId() == 1|| paragraph.getTextTypeId() == 5}">
                             <c:out escapeXml="false" value="${paragraph.getText()}"/>
+                            <c:if test="${part.getChildrenParts().toArray()[part.getChildrenParts().size()-1].getPartId().equals(childPart.getPartId())}">
+                                    <div class="col-lg-12">
+                                        <form action="${pageContext.request.contextPath}/api/sphere/" method="post">
+                                            <textarea rows="6" name="sourceCode"></textarea>
+                                            <br/>
+                                            <input value="Запустити" name="submit" type="submit" class="btn btn-success"/>
+                                        </form>
+                                        <br/>
+                                    </div>
+                            </c:if>
                         </c:if>
                         <c:if test="${paragraph.getTextTypeId() == 2}">
                                 <pre>
