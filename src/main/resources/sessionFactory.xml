@@ -24,6 +24,8 @@
     <mapping class="dal.entities.TextTypeEntity"/>
     <mapping class="dal.entities.UserRolesEntity"/>
     <mapping class="dal.entities.UsersEntity"/>
+    <mapping class="dal.entities.QuestionEntity"/>
+    <mapping class="dal.entities.AnswerEntity"/>
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
 

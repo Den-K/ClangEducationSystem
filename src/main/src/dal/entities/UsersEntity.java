@@ -2,9 +2,6 @@ package dal.entities;
 
 import javax.persistence.*;
 
-/**
- * Created by alex on 05.06.16.
- */
 @Entity
 @Table(name = "users")
 public class UsersEntity implements BaseEntity{

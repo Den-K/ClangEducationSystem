@@ -3,7 +3,7 @@ package dal.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "part")
+@Table(name = "answer")
 public class AnswerEntity {
     private int answerId;
     private Integer questionId;
@@ -15,7 +15,6 @@ public class AnswerEntity {
     public int getAnswerId() {
         return answerId;
     }
-
     public void setAnswerId(int answerId) {
         this.answerId = answerId;
     }
@@ -25,7 +24,6 @@ public class AnswerEntity {
     public Integer getQuestionId() {
         return questionId;
     }
-
     public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
     }

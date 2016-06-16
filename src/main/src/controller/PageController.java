@@ -1,24 +1,38 @@
 package controller;
 
+import dal.entities.AnswerEntity;
 import dal.entities.PartEntity;
+import dal.entities.QuestionEntity;
 import dal.entities.UsersEntity;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Order;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("page")
 public class PageController {
+
+    private Session getSession()
+    {
+        Configuration cfg = new Configuration();
+        // configuration file
+        cfg.configure("sessionFactory.xml");// populates the data of the
+
+        // creating session factory object
+        SessionFactory factory = cfg.buildSessionFactory();
+
+        // creating session object
+        return factory.openSession();
+    }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registrationPage(ModelAndView modelAndView) {
@@ -50,41 +64,72 @@ public class PageController {
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public ModelAndView mainPage(ModelAndView modelAndView) {
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Session session = null;
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            session = getSession();
 
-        Configuration cfg = new Configuration();
-        cfg.configure("sessionFactory.xml");// populates the data of the
-        // configuration file
+            Query query = session.createQuery("from UsersEntity where login=:login");
+            query.setParameter("login", auth.getName());
+            UsersEntity user = (UsersEntity) query.uniqueResult();
 
-        // creating seession factory object
-        SessionFactory factory = cfg.buildSessionFactory();
+            Criteria criteria = session.createCriteria(PartEntity.class);
+            List<PartEntity> parts = criteria.list();
 
-        // creating session object
-        Session session = factory.openSession();
+            List<PartEntity> rootParts = new ArrayList<>();
 
-        // creating transaction object
-        Transaction t = session.beginTransaction();
-
-        Query query= session.createQuery("from UsersEntity where login=:login");
-        query.setParameter("login", auth.getName());
-        UsersEntity user = (UsersEntity) query.uniqueResult();
-
-        Criteria criteria = session.createCriteria(PartEntity.class);
-        criteria.addOrder(Order.asc("orderNo"));
-        List<PartEntity> parts = criteria.list();
-
-        List<PartEntity> rootParts = new ArrayList<>();
-
-        for (PartEntity part:parts) {
-            if(part.getParentId() == null)
-            {
-                rootParts.add(part);
+            for (PartEntity part:parts) {
+                if(part.getParentId() == null)
+                {
+                    rootParts.add(part);
+                }
             }
-        }
 
-        modelAndView.getModelMap().put("parts", rootParts);
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("main");
-        return modelAndView;
+            modelAndView.getModelMap().put("parts", rootParts);
+            modelAndView.addObject("user", user);
+            modelAndView.setViewName("main");
+
+            return modelAndView;
+
+    }
+
+    @RequestMapping(value = "/question", method = RequestMethod.GET)
+    public ModelAndView getQuestion(@RequestParam int id)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+
+        Session session = null;
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            session = getSession();
+
+            Query userQuery = session.createQuery("from UsersEntity where login=:login");
+            userQuery.setParameter("login", auth.getName());
+            UsersEntity user = (UsersEntity) userQuery.uniqueResult();
+
+            Query questionQuery = session.createQuery("from QuestionEntity where questionId=:id");
+            questionQuery.setParameter("id", id);
+            QuestionEntity question = (QuestionEntity) questionQuery.uniqueResult();
+
+            modelAndView.addObject("user", user);
+            modelAndView.addObject("question", question);
+            modelAndView.setViewName("question");
+
+            return modelAndView;
+
+    }
+
+    @RequestMapping(value = "/answer", method = RequestMethod.POST)
+    public ModelAndView getNextQuestionFromAnswer(@RequestParam int answerId)
+    {
+        Session session =  getSession();
+
+        Query query = session.createQuery("from AnswerEntity where answerId=:answer");
+        query.setParameter("answer", answerId);
+        AnswerEntity answer = (AnswerEntity) query.uniqueResult();
+
+        QuestionEntity question = answer.getQuestionEntity();
+
+        return getQuestion(question.getQuestionId()+1);
+
     }
 }
