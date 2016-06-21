@@ -115,6 +115,8 @@
                                 </pre>
                         </c:if>
                     </c:forEach>
+                    <br/>
+                    <button type="button" class="btn btn-info" onclick="window.location='${pageContext.request.contextPath}/page/question?id=${part.getPartId()}';">Перейти до запитань</button>
                 </c:forEach>
             </div>
         </c:forEach>

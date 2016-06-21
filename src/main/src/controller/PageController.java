@@ -106,12 +106,13 @@ public class PageController {
             userQuery.setParameter("login", auth.getName());
             UsersEntity user = (UsersEntity) userQuery.uniqueResult();
 
-            Query questionQuery = session.createQuery("from QuestionEntity where questionId=:id");
+            Query questionQuery = session.createQuery(
+                    "select q from QuestionEntity as q inner join q.paragraphEntity as p where p.partEntity.parentId=:id");
             questionQuery.setParameter("id", id);
-            QuestionEntity question = (QuestionEntity) questionQuery.uniqueResult();
+            List<QuestionEntity> questions = questionQuery.list();
 
             modelAndView.addObject("user", user);
-            modelAndView.addObject("question", question);
+            modelAndView.addObject("questions", questions);
             modelAndView.setViewName("question");
 
             return modelAndView;
@@ -119,17 +120,11 @@ public class PageController {
     }
 
     @RequestMapping(value = "/answer", method = RequestMethod.POST)
-    public ModelAndView getNextQuestionFromAnswer(@RequestParam int answerId)
+    public ModelAndView getNextQuestionFromAnswer()
     {
-        Session session =  getSession();
 
-        Query query = session.createQuery("from AnswerEntity where answerId=:answer");
-        query.setParameter("answer", answerId);
-        AnswerEntity answer = (AnswerEntity) query.uniqueResult();
+        ModelAndView modelAndView = new ModelAndView();
 
-        QuestionEntity question = answer.getQuestionEntity();
-
-        return getQuestion(question.getQuestionId()+1);
-
+        return mainPage(modelAndView);
     }
 }

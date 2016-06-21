@@ -48,15 +48,19 @@
 <%--page data--%>
 <div>
     <div class="col-lg-12">
-    <h3><c:out value="${question.text}"/></h3>
-    <form action="${pageContext.request.contextPath}/page/answer" method="post">
-    <c:forEach  items="${question.answers}" var="answer" >
-        <div class="radio">
-            <label><input type="radio" name="answerId" value="<c:out value="${answer.answerId}" />">
-                <c:out value="${answer.text}"/>
-            </label>
-        </div>
-        </c:forEach>
+        <c:set var="questionNum" scope="page" value="${0}"/>
+        <form action="${pageContext.request.contextPath}/page/answer" method="post">
+            <c:forEach items="${questions}" var="question">
+                <h3><c:out value="${question.text}"/></h3>
+                <c:forEach  items="${question.answers}" var="answer" >
+                    <div class="radio">
+                        <label><input type="radio" name="answerIds[${question.questionId}]" value="<c:out value="${answer.answerId}" />">
+                            <c:out value="${answer.text}"/>
+                        </label>
+                    </div>
+                </c:forEach>
+                <c:set var="questionNum" value="${1 + questionNum}"/>
+            </c:forEach>
         <button type="submit" class="btn btn-default">Надіслати</button>
     </form>
     </div>

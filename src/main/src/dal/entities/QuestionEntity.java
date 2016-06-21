@@ -12,6 +12,7 @@ public class QuestionEntity implements BaseEntity {
     private Integer paragraphId;
     private String text;
     private Set<AnswerEntity> answers = new HashSet<>();
+    private ParagraphEntity paragraphEntity;
 
     @Id
     @Column(name = "question_id", nullable = false)
@@ -32,7 +33,7 @@ public class QuestionEntity implements BaseEntity {
     }
 
     @Basic
-    @Column(name = "paragraph_id")
+    @Column(name = "paragraph_id", insertable = false, updatable = false)
     public Integer getParagraphId() {
         return paragraphId;
     }
@@ -55,5 +56,15 @@ public class QuestionEntity implements BaseEntity {
     }
     public void setAnswers(Set<AnswerEntity> answers) {
         this.answers = answers;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "paragraph_id", nullable = false)
+    public ParagraphEntity getParagraphEntity() {
+        return paragraphEntity;
+    }
+
+    public void setParagraphEntity(ParagraphEntity paragraphEntity) {
+        this.paragraphEntity = paragraphEntity;
     }
 }
