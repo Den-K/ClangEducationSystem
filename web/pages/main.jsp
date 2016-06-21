@@ -45,6 +45,11 @@
         </div>
     </div>
 </nav>
+<div style="width: 80vw; margin-left: 10vw">
+    <div class="progress progress-striped active">
+        <div id="progressWidth" class="progress-bar" style="width: 0"></div>
+    </div>
+</div>
 <%--menu--%>
 <div class="col-lg-3">
     <div class="well well-lg">
@@ -137,6 +142,7 @@
             alert(data);
             if(data.toString() == "Right!"){
                 $("#learned1").append("<span class=\"glyphicon glyphicon-ok\"></span>&nbsp;&nbsp;&nbsp;");
+                $("#progressWidth").css('width', '50%');
             }
         });
     });
