@@ -5,10 +5,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import sphereengine.dto.ResultDTO;
@@ -19,7 +16,7 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@Controller
+@RestController
 @RequestMapping("/api/sphere")
 public class SphereRest {
 
@@ -39,9 +36,9 @@ public class SphereRest {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ModelAndView submitCode(@RequestParam String sourceCode, @RequestParam(required = false) String input, ModelAndView modelAndView) {
+    public String submitCode(@RequestParam String sourceCode, @RequestParam(required = false) String input,
+                                   @RequestParam(required = false) String login) throws Exception {
 
-        //sourceCode = sourceCode.replaceAll("\\n","\r");
         SubmissionDTO submissionDTO = new SubmissionDTO();
         submissionDTO.setSourceCode(sourceCode);
         submissionDTO.setLanguage(LANGUAGE_KEY);
@@ -51,17 +48,41 @@ public class SphereRest {
 
         ResultDTO resultDTO = null;
         if(!(submissionKeyDTO.getId() == null))
-            resultDTO = getResultDTO(submissionKeyDTO.getId());
+            try {
+                resultDTO = getResultDTO(submissionKeyDTO.getId());
+            } catch (Exception e) {
+                throw new Exception(resultDTO.getStderr());
+            }
 
-        modelAndView.setViewName("result");
-        modelAndView.addObject("resultDTO", resultDTO);
+        String message = null;
+        if(login != null) {
+            String userResult = resultDTO.getOutput();
+            if(userResult.equals("Hello, " + login))
+                message = "Right!";
+            else
+                message = "Wrong! Your result: " + userResult;
 
-        return modelAndView;
+        }
+
+        return message;
     }
 
-    private ResultDTO getResultDTO(String submissionKey) {
+    private ResultDTO getResultDTO(String submissionKey) throws Exception {
         String submissionResultUrl = String.format("%s%s%s%s%s", SPHERE_URL, ENDPOINT_URL, "/"+submissionKey, ACCESS_TOKEN,"&withSource=1&withInput=1&withOutput=1&withStderr=1&withCmpinfo=1");
-        return restTemplate.getForObject(submissionResultUrl, ResultDTO.class);
+        int status = -1;
+        int result;
+        ResultDTO resultDTO = null;
+        while(status != 0) {
+            resultDTO = restTemplate.getForObject(submissionResultUrl, ResultDTO.class);
+            status = Integer.parseInt(resultDTO.getStatus());
+            result = Integer.parseInt(resultDTO.getResult());
+
+            if(status == 0 && result != 15) {
+                throw new Exception();
+            }
+        }
+
+        return resultDTO;
     }
 
     private SubmissionKeyDTO getSubmissionKey(SubmissionDTO submissionDTO) {
@@ -70,5 +91,15 @@ public class SphereRest {
         HttpEntity<SubmissionDTO> httpRequestSubmission = new HttpEntity<>(submissionDTO,headers);
         String submissionUrl = String.format("%s%s%s", SPHERE_URL, ENDPOINT_URL, ACCESS_TOKEN);
         return restTemplate.postForObject(submissionUrl, httpRequestSubmission, SubmissionKeyDTO.class);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleAllExceptions(Exception e) {
+
+        ModelAndView model = new ModelAndView("errors/compilation_error");
+        model.addObject("errorMessage", e.getMessage());
+
+        return model;
+
     }
 }

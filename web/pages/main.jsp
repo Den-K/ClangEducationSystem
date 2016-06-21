@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Головна - Навчальна система - Мова Сі</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <%@ include file="include_resources.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/highlight/styles/color-brewer.css">
     <script src="${pageContext.request.contextPath}/resources/highlight/highlight.pack.js"></script>
@@ -53,6 +54,7 @@
                     <li class="nav-divider"></li>
                 </c:if>
                 <li>
+                    <span id="learned${part.getPartId()}"></span>
                     <label class="tree-toggler nav-header">
                         <a href="#part<c:out value="${part.getPartId()}"/>" onclick="{
                                 $('.part').hide();
@@ -95,16 +97,21 @@
                     <h4 id="part<c:out value="${childPart.getPartId()}"/>"><c:out value="${childPart.getName()}"/></h4>
                     <c:forEach items="${childPart.getChildrenParagraphs()}" var="paragraph">
                         <c:if test="${paragraph.getTextTypeId() == 1|| paragraph.getTextTypeId() == 5}">
+                        <c:if test="${childPart.getPartId() == 3 || childPart.getPartId() == 8}">
+                            <button type="button" class="btn btn-info" onclick="window.location='${pageContext.request.contextPath}/page/question?id=${part.getPartId()}';">Перейти до запитань</button>
+                        </c:if>
                             <c:out escapeXml="false" value="${paragraph.getText()}"/>
-                            <c:if test="${part.getChildrenParts().toArray()[part.getChildrenParts().size()-1].getPartId().equals(childPart.getPartId())}">
-                                    <div class="col-lg-12">
-                                        <form action="${pageContext.request.contextPath}/api/sphere/" method="post">
-                                            <textarea rows="6" name="sourceCode"></textarea>
-                                            <br/>
-                                            <input value="Запустити" name="submit" type="submit" class="btn btn-success"/>
-                                        </form>
+                            <c:if test="${childPart.getPartId() == 3 || childPart.getPartId() == 8}">
+                                <br/>
+                                <div class="col-lg-12">
+                                    <form name="taskForm" id="taskForm" action="${pageContext.request.contextPath}/api/sphere/" method="post">
+                                        <textarea rows="5" cols="45" name="sourceCode" id="sourceCode"></textarea>
                                         <br/>
-                                    </div>
+                                        <input value="Запустити" name="submit" type="submit" class="btn btn-success"/>
+                                        <input type="hidden" name="login" id="userLogin" value="${user.login}">
+                                    </form>
+                                    <br/>
+                                </div>
                             </c:if>
                         </c:if>
                         <c:if test="${paragraph.getTextTypeId() == 2}">
@@ -117,10 +124,22 @@
                     </c:forEach>
                 </c:forEach>
                 <br/>
-                <button type="button" class="btn btn-info" onclick="window.location='${pageContext.request.contextPath}/page/question?id=${part.getPartId()}';">Перейти до запитань</button>
             </div>
         </c:forEach>
     </div>
 </div>
+<script type="text/javascript" charset="utf-8">
+    $("#taskForm").submit(function (e) {
+        e.preventDefault();
+        var res = $.post("${pageContext.request.contextPath}/api/sphere/",{sourceCode: $('#sourceCode').val(),login: $('#userLogin').val()})
+
+        res.done(function(data) {
+            alert(data);
+            if(data.toString() == "Right!"){
+                $("#learned1").append("<span class=\"glyphicon glyphicon-ok\"></span>&nbsp;&nbsp;&nbsp;");
+            }
+        });
+    });
+</script>
 </body>
 </html>
